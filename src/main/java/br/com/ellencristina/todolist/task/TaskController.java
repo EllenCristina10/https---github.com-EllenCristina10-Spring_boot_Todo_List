@@ -37,13 +37,13 @@ public class TaskController {
         // 10/10/2023 - StarAt
         if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("A data de início / data de término deve ser maior do que a data atual");
+                    .body("A data de início / data de término deve ser maior do que a data atual.");
         }
 
         // Verifica se a data de início será depois do que a data de término
         if (taskModel.getStartAt().isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("A data de início deve ser menor do que a data de término");
+                    .body("A data de início deve ser menor do que a data de término.");
         }
 
         var task = this.taskRepository.save(taskModel);
@@ -64,7 +64,7 @@ public class TaskController {
 
         if (taks == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Tarefa não encontrada");
+                    .body("Tarefa não encontrada!");
         }
 
         var idUser = request.getAttribute("idUser");
@@ -72,7 +72,7 @@ public class TaskController {
         //Verifica se o id do usuário da tarefa é igual ao id do usuário
         if (!taks.getIdUser().equals(idUser)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Usuário não tem permissão para alterar essa tarefa");
+                    .body("Usuário não tem permissão para alterar essa tarefa.");
         }
 
         Utils.copyNoNullProperties(taskModel, taks);
